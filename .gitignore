@@ -4,5 +4,3 @@ CMakeLists.txt
 assemble.sh
 build.sh
 cmake-build-debug/
-src/boot/intel_16/
-src/system/
