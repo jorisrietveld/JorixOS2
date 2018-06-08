@@ -13,16 +13,14 @@
   <thead>
     <tr>
     <th colspan="4" align="center"> <strong>Register name</strong> </th>
-    <th align="center"> <strong>Name</strong> </th>
-    <th align="center"> <strong>Description</strong> </th>
+    <th rowspan="2" align="center"> <strong>Name</strong> </th>
+    <th rowspan="2" align="center"> <strong>Description</strong> </th>
     </tr>
     <tr>
     <th>64</th>
     <th>32</th>
     <th>16</th>
     <th>8</th>
-    <th></th>
-    <th></th>
     </tr>
   </thead>
   <tbody>
