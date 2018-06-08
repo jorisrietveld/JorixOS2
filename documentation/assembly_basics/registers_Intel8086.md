@@ -19,22 +19,6 @@ is build up from 2 registers each 1 byte long. They are the registers with the H
         <th>16 bit high</th>
         <th>16 bit low</th>
     </tr>
-    <!--<tr>
-        <td align="center" colspan="2"></td>
-        <td align="center" colspan="1">8 bit<br>0000 0000</td>
-        <td align="center" colspan="1">8 bit<br>0000 0000</td>
-    </tr>
-    <tr>
-        <td align="center"  colspan="2"></td>
-        <td align="center"  colspan="2">16 bit<br>0000 0000 0000 0000</td>
-    </tr>
-    <tr>
-        <td align="center"></th>
-        <td align="center" colspan="3">32 bit<br>0000 0000 0000 0000 0000 0000 0000 0000</td>
-    </tr>
-    <tr>
-        <td align="center" colspan="4">64 bit<br>0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000</td>
-    </tr>-->
     <tr>
         <td colspan="2"></td>
         <td align="center">{}H</td>
@@ -92,6 +76,27 @@ is build up from 2 registers each 1 byte long. They are the registers with the H
     <tr><td align="right">rbx</td><td>ebx</td><td>bx</td><td>bl</td><td align="right">              Base Register </td><td align="right"> Used as a pointer to data (located in segment register DS, when in segmented mode). </td></tr>
 </table>
 
+## Stack Registers
+<table>
+  <thead>
+    <tr>
+    <th colspan="4" align="center"> <strong>Register name</strong> </th>
+    <th rowspan="2" align="center"> <strong>Name</strong> </th>
+    <th rowspan="2" align="center"> <strong>Description</strong> </th>
+    </tr>
+    <tr>
+    <th>64</th>
+    <th>32</th>
+    <th>16</th>
+    <th>8</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td align="right">rsp</td><td>esp</td><td>sp</td><td>spl</td><td align="right"> Stack Pointer Register </td><td align="right">  Pointer to the top of the stack. </td></tr>
+    <tr><td align="right">rbp</td><td>ebp</td><td>bp</td><td>bpl</td><td align="right"> Stack Base Pointer Regiser </td><td align="right"> Pointer to the base of the stack. </td></tr>
+  </tbody>
+</table>
+
 ## Pointer Registers
 <table>
   <thead>
@@ -108,9 +113,8 @@ is build up from 2 registers each 1 byte long. They are the registers with the H
     </tr>
   </thead>
   <tbody>
-    <tr><td align="right">rx</td><td>ex</td><td>x</td><td>sp</td><td align="right">     Stack Pointer Register </td><td align="right">                                                   Pointer to the top of the stack. </td></tr>
-    <tr><td align="right">rx</td><td>ex</td><td>x</td><td>SB</td><td align="right"> Stack Base Pointer Regiser </td><td align="right">                                                  Pointer to the base of the stack. </td></tr>
-    <tr><td align="right">rx</td><td>ex</td><td>x</td><td>SI</td><td align="right">      Source Index Register </td><td align="right">                                Used as a pointer to a source in stream operations. </td></tr>
-    <tr><td align="right">rx</td><td>ex</td><td>x</td><td>DI</td><td align="right"> Destination Index Register </td><td align="right">                           Used as a pointer to a destination in stream operations. </td></tr>
+    <tr><td align="right">rsp</td><td>esp</td><td>si</td><td>sil</td><td align="right"> Source Index </td><td align="right">        Used as a pointer to a source in stream operations. </td></tr>
+    <tr><td align="right">rdp</td><td>edp</td><td>di</td><td>dil</td><td align="right"> Destination Index </td><td align="right">   Used as a pointer to a destination in stream operations. </td></tr>
+    <tr><td align="right">rip</td><td>eip</td><td>ip</td><td>ipl</td><td align="right"> Instruction Pointer </td><td align="right"> Used as a pointer to the next instruction to execute. </td></tr>
   </tbody>
 </table>
