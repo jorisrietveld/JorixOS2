@@ -8,7 +8,69 @@
   -->
 # Registers of the Intel 8086 Achritecture
 
-## GPR General Purpose Registers
+## The register build up
+_This table shows the names of the registers and how they are build up. notice that the 16 bit register
+is build up from 2 registers each 1 byte long. They are the registers with the H and L surfix_
+
+<table>
+    <tr>
+        <th>64 bit</th>
+        <th>32 bit</th>
+        <th>16 bit high</th>
+        <th>16 bit low</th>
+    </tr>
+    <tr>
+        <td align="center" colspan="2"></td>
+        <td align="center" colspan="1">8 bit<br>0000 0000</td>
+        <td align="center" colspan="1">8 bit<br>0000 0000</td>
+    </tr>
+    <tr>
+        <td align="center"  colspan="2"></td>
+        <td align="center"  colspan="2">16 bit<br>0000 0000 0000 0000</td>
+    </tr>
+    <tr>
+        <td align="center"></th>
+        <td align="center" colspan="3">32 bit<br>0000 0000 0000 0000 0000 0000 0000 0000</td>
+    </tr>
+    <tr>
+        <td align="center" colspan="4">64 bit<br>0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000</td>
+    </tr>
+    <tr>
+        <td colspan="2"></td>
+        <td align="center">{}H</td>
+        <td align="center">{}L</td>
+    </tr>
+    <tr>
+        <td colspan="2></td>
+        <td colspan="2></td>
+        <td colspan="2" align="center">{}X</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td colspan="3" align="center">E{}X</td>
+    </tr>
+    <tr>
+      <td colspan="4" align="center">R{}X</td>
+    </tr>
+    <tr>
+        <td colspan="2"></td>
+        <td align="center">`AH BH CH DH`</td>
+        <td align="center">`AL BL CL DL`</td>
+    </tr>
+    <tr>
+      <td align="center" colspan="2"></td>
+      <td colspan="2" align="center">`AX BX CX DX`</td>
+    </tr>
+    <tr>
+        <td align="center"></td>
+        <td align="center" colspan="3">`EAX EBX ECX EDX`</td>
+      </tr>
+      <tr>
+      <td align="center"colspan="4">`RAX RBX RCX RDX`</td>
+    </tr>
+</table>
+
+## General Purpose Registers
 <table>
   <thead>
     <tr>
