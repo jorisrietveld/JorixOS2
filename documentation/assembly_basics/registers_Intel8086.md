@@ -19,7 +19,7 @@ is build up from 2 registers each 1 byte long. They are the registers with the H
         <th>16 bit high</th>
         <th>16 bit low</th>
     </tr>
-    <tr>
+    <!--<tr>
         <td align="center" colspan="2"></td>
         <td align="center" colspan="1">8 bit<br>0000 0000</td>
         <td align="center" colspan="1">8 bit<br>0000 0000</td>
@@ -34,7 +34,7 @@ is build up from 2 registers each 1 byte long. They are the registers with the H
     </tr>
     <tr>
         <td align="center" colspan="4">64 bit<br>0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000</td>
-    </tr>
+    </tr>-->
     <tr>
         <td colspan="2"></td>
         <td align="center">{}H</td>
