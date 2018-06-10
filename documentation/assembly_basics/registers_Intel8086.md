@@ -118,3 +118,22 @@ is build up from 2 registers each 1 byte long. They are the registers with the H
     <tr><td align="right">rip</td><td>eip</td><td>ip</td><td>ipl</td><td align="right"> Instruction Pointer </td><td align="right"> Used as a pointer to the next instruction to execute. </td></tr>
   </tbody>
 </table>
+
+## Segment Registers
+<table>
+  <thead>
+    <tr>
+    <th colspan="1" align="center"> <strong>Register name</strong> </th>
+    <th align="center"> <strong>Name</strong> </th>
+    <th align="center"> <strong>Description</strong> </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td align="right"> cs </td><td align="right"> Code Segment </td><td align="right"> </td></tr>
+    <tr><td align="right"> ds </td><td align="right"> Data Segment </td><td align="right"> </td></tr>
+    <tr><td align="right"> ss </td><td align="right"> Stack Segment </td><td align="right"> </td></tr>
+    <tr><td align="right"> es </td><td align="right"> Extra Segment </td><td align="right"> </td></tr>
+    <tr><td align="right"> fs </td><td align="right"> File Segment </td><td align="right"> </td></tr>
+    <tr><td align="right"> gs </td><td align="right"> General Segment </td><td align="right"> </td></tr>
+  </tbody>
+</table>

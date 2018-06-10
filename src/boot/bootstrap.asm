@@ -1,11 +1,21 @@
 [bits 16]
 
-jmp start
+jmp Initialize
 
+; Included libraries
+%include "intel16/common.inc"
 %include "intel16/utils.inc"
-%include "intel16/types.inc"
+%include "intel16/a20.inc"
 
-start:
+; Variables and Data
+bootdevice equ 0
+sectors equ 1
+
+;_________________________________________________________________________________________________________________________/ Initialize
+;   Description:
+;   Initialize the bootloader by setting up the data en stack segment.
+;
+Initialize:
     ; Initialize the stack after the bootloader code and buffer.
     mov ax, 0x07C0                      ; Initialize the stack at 0x9C0
     add ax, 0x120                       ; (4096 + 512 ) / 16 bytes per paragraph.
@@ -23,35 +33,62 @@ start:
     mov cx, 0x2607                      ; Set video mode parameter to hide the cursor.
     int 0x10                            ; Execute the interrupt to hide the cursor.
 
+;_________________________________________________________________________________________________________________________/ EnableA20
+;   Description:
+;   Enable the A20 line
+;
 EnableA20:
-    in al, 0x92                         ;
-    or al, 2                            ;
-    out 0x92, al                        ;
+    call CheckA20                       ; Check if the A20 gate is already enabled.
+    call enable_a20_bios                ; Try to enable the A20 gate with an BIOS interrupt.
+    call CheckA20                       ; Check if the BIOS interrupt worked.
+    call enable_a20_keyboard            ; No luck, try writing to the keyboard (PC/2) controller.
+    call CheckA20                       ; Check if writing to the keyboard controller worked.
+    call enable_a20_fast                ; Running out of options, try it the dangerous way that can blank the monitor.
+    call CheckA20                       ; Check if writing to the System Control Port worked...
 
-PrintMenu:
-    newline_16                          ; Print an new line above the menu header.
-    print_16 header_border              ; Print the top border of the menu header.
-    print_16 header_text                ; Print the Title of the menu header.
-    print_16 header_border              ; Print the Bottom border of the menu header.
-    newline_16                          ; Print an margin between the menu header and the menu.
+    ; In your case, switching the A20 gate might involve black magic.
+    .giveUp:
+        ;println_16 msg_fatal            ; Notify the user that the system is unable to boot.
+        jmp HeatDeathOfTheUniverse      ; Halt the processor until this moment.
 
+CheckA20:
+    call check_a20                      ; Check if the A20 line is enabled.
+    cmp ax, 1                           ; does check_a20 return a one?
+    je LoadStage2                       ; The BIOS enabled it for us, tnx!
+    ret                                 ; That did'nt work return to the caller.
 
+LoadStage2:
+    .resetDisk:
+        xor ax, ax                      ; Clear to use as a reset argument for the low level disk services interrupt.
+        xor ah, ah                      ;
+        mov dl, 0                       ;
+        int BIOS_INTERRUPT_DISK         ;
+        jc DiskResetFailed              ;
 
+        mov ax, 0x90                    ; Get the address 0x90
+        mov es, ax                      ; Set the extra segment at location 0x90
+        xor dx, dx                      ; Move the data segment to 0
 
+    .readSectors:
+        mov ah, 0x02                    ; Set the disk interrupt function to read sectors from disk.
+        mov al, sectors                 ; Number of sectors to read from the disk.
+        xor ch, ch                      ; The cylinder number, xor to make it cylinder 0.
+        mov cl, 0x02                    ; Sector 2
+        xor dh, dh                      ; The head to use, xor to make it head 0.
+        mov dl, bootdevice              ; The drive number to read from.
+        int BIOS_INTERRUPT_DISK         ; Read the sectors from the disk with the disk services interrupt.
+        jc ReadingSectorsFailed         ;
+        cmp al, sectors                 ;
+        jne ReadingSectorsFailed        ;
 
-; Variables and data.
-string header_border, '========================================'
-string header_text, '=  Welcome to the JorixOS2 Bootloader  ='
-string message_press_key, 'Press any key to load the second stage...'
-string msg_load_stage2, 'Attempt to load the second stage.'
-string msg_error_disk_reset, 'Reset disk failed.'
-string msg_error_disk_read, 'Read disk failed.'
-string msg_error_load_stage2, 'Loading stage 2 failed.'
+    .runStage2:
+        jmp dword 0x90:00                   ;
 
-
-
-cli                     ; Clear the interrupts.
-hlt                     ; Halt the processor.
+DiskResetFailed:
+ReadingSectorsFailed:
+HeatDeathOfTheUniverse:
+    cli                     ; Clear the interrupts.
+    hlt                     ; Halt the processor.
 
 times 510 - ($-$$) db 0 ; Zero 510 bites minus the existing bites.
 dw 0xAA55               ; Bootable signature.

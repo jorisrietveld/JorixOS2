@@ -3,12 +3,12 @@
 ;   Created: 06-01-2018 07:45
 ;   
 ;   Description:
-;   This file contains some macro constants for defining ascii characters.
-
+;   This file defines easy to remember names for ascii control codes and characters.
+;
 %ifndef __ASCII_INC_INCLUDED__
 %define __ASCII_INC_INCLUDED__
 
-%define ASCII_CRTL_NULL  0x00            ; Null character.
+%define ASCII_CRTL_NULL 0x00            ; Null character.
 %define ASCII_CRTL_SOH  0x01            ; Start Of Heading character.
 %define ASCII_CRTL_STX  0x02            ; Start Of Text character.
 %define ASCII_CRTL_ETX  0x03            ; End Of Text character.
